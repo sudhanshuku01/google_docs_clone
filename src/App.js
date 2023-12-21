@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import TextEditor from "./TextEditor"
+import {
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom"
+import { v4 as uuidV4 } from "uuid"
 
-function App() {
+const Home = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+
+    navigate(`/documents/${uuidV4()}`);
+  // eslint-disable-next-line
+  }, []);
+  return null;
+};
+
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      <Route path="/"  element={<Home />}  />
+      <Route path="/documents/:id" element={ <TextEditor />} />
+    </Routes>
+  )
 }
 
-export default App;
+export default App
